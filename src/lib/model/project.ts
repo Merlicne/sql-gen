@@ -1,7 +1,8 @@
 import type { DatabaseEngine } from "./databaseEngine";
 
-export interface Session {
+export interface Project {
     id: string;
+    name: string;
     engines: DatabaseEngine[];
     createdAt: Date;
 }

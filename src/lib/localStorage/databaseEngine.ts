@@ -1,36 +1,36 @@
 
 import type { DatabaseEngine } from "../model/databaseEngine";
-import type { Session } from "../model/session";
+import type { Project } from "../model/project";
 
-function getDatabaseEngineData(session: Session, name: string): DatabaseEngine | null {
-    if (!session || !name) {
+function getDatabaseEngineData(project: Project, name: string): DatabaseEngine | null {
+    if (!project || !name) {
         return null;
     }
-    const engine = session.engines.find((engine) => engine.name === name);
+    const engine = project.engines.find((engine) => engine.name === name);
     return engine || null;
 }
 
-function updateDatabaseEngine(session: Session, engine: DatabaseEngine): Session {
-    if (!session || !engine) {
-        return session;
+function updateDatabaseEngine(project: Project, engine: DatabaseEngine): Project {
+    if (!project || !engine) {
+        return project;
     }
-    const updatedEngines = session.engines.map((e) =>
+    const updatedEngines = project.engines.map((e) =>
         e.id === engine.id ? { ...e, ...engine } : e
     );
-    return { ...session, engines: updatedEngines };
+    return { ...project, engines: updatedEngines };
 }
 
-function addDatabaseEngine(session: Session, engine: DatabaseEngine): Session {
-    if (!session || !engine) {
-        return session;
+function addDatabaseEngine(project: Project, engine: DatabaseEngine): Project {
+    if (!project || !engine) {
+        return project;
     }
-    return { ...session, engines: [...session.engines, engine] };
+    return { ...project, engines: [...project.engines, engine] };
 }
 
-function removeDatabaseEngine(session: Session, name: string): Session {
-    if (!session || !name) {
-        return session;
+function removeDatabaseEngine(project: Project, name: string): Project {
+    if (!project || !name) {
+        return project;
     }
-    const updatedEngines = session.engines.filter((e) => e.name !== name);
-    return { ...session, engines: updatedEngines };
+    const updatedEngines = project.engines.filter((e) => e.name !== name);
+    return { ...project, engines: updatedEngatedEngines };
 }
