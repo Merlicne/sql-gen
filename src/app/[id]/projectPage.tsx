@@ -2,17 +2,22 @@
 import { EngineList } from "@/components/custom/engineList";
 import { getProject } from "@/lib/localStorage/project";
 import type { DatabaseEngine } from "@/lib/model/databaseEngine";
+import Link from "next/link";
 import { redirect} from "next/navigation";
 import React from "react";
 
 export default function ProjectPage({ id, engines }: {id: string, engines: DatabaseEngine[]}) {
   const project = getProject(id);
   const urlPrefix = `/${project?.id}`;
-  if (!project) {
-    redirect("/");
-  }
-  
-
+  // 2 sec wait for project to not be null
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (!project) {
+        alert("Project not found");
+        redirect("/");
+      }
+    }, 1000);
+  }, [project]);
 
   return (
     <main className="flex min-h-screen flex-col items-center text-black">
@@ -20,7 +25,7 @@ export default function ProjectPage({ id, engines }: {id: string, engines: Datab
         <h1 className="text-5xl font-extrabold tracking-tight text-black sm:text-[5rem]">
           Choose your <span className="bg-gradient-to-l from-[#000088] to-teal-500 text-transparent bg-clip-text">Database</span>
         </h1>
-        <p className="text-lg text-black">Project ID: {project.id}</p>
+        <p className="text-lg text-black">Project ID: {project?.id}</p>
         <EngineList urlPrefix={urlPrefix} engines={engines}/>
       </div>
     </main>

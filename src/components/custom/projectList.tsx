@@ -1,5 +1,5 @@
 import type { Project } from "@/lib/model/project";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
